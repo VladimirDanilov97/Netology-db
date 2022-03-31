@@ -30,7 +30,7 @@ category_name varchar(40) UNIQUE NOT NULL
 CREATE TABLE IF NOT EXISTS album(
 id           serial PRIMARY KEY,
 album_name   varchar(80) NOT NULL,
-release_date date NOT NULL
+release_date integer NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS artist_album(
