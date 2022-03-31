@@ -9,7 +9,7 @@ class MyDb():
         self.engine = sqlalchemy.create_engine(self.db)
         self.connection = self.engine.connect()
 
-    def insert(self, table, columns_to_insert, values):     
+    def insert(self, table, columns_to_insert, values):
         quotted_values = [f"'{value}'" for value in values]
         joined_values = ', '.join(quotted_values)
         joined_columns_to_insert = ', '.join(columns_to_insert)
@@ -66,7 +66,7 @@ def main(artists):
     spotify = spotipy.Spotify(client_credentials_manager=credentials)
     response = spotify.search(q='The Weeknd', type='artist', limit=1)
 
-    clear_music_database(my_db)
+    # clear_music_database(my_db) Clear all database
 
     for artist in artists:
         my_db.insert('artist', ['artist_name'], [artist])
@@ -93,29 +93,32 @@ def main(artists):
 
             track_name = track['name']
             track_duration = track['duration_ms']
-            
+
             all_albums = [(columns[0], columns[1]) for columns in my_db.select_all(
                 'SELECT album_name, release_date FROM album')]
-            
+
             if (album_name, album_release) not in all_albums:
-                album_name = album_name.replace("'","''")
+                album_name = album_name.replace("'", "''")
                 my_db.insert('album', ['album_name', 'release_date'], [album_name, album_release])
             else:
-                album_name = album_name.replace("'","''")
+                album_name = album_name.replace("'", "''")
 
             album_id = my_db.select_one(
                 f'''SELECT id FROM album
                     WHERE album_name='{album_name}' and release_date={album_release};''')[0]
-            artist_album = [columns for columns in my_db.select_all('SELECT artist_id, album_id FROM artist_album')]
+            artist_album = [
+                columns for columns in my_db.select_all(
+                    'SELECT artist_id, album_id FROM artist_album')]
             if (artist_id, album_id) not in artist_album:
                 my_db.insert('artist_album', ['artist_id', 'album_id'], [artist_id, album_id])
 
-            track_name = track_name.replace("'","''")
+            track_name = track_name.replace("'", "''")
             my_db.insert('track', ['track_name', 'duration', 'album_id'],
-                                [track_name, track_duration, album_id])
+                                  [track_name, track_duration, album_id])
 
 
-if __name__=='__main__':
+if __name__== '__main__':
     artists = ['Placebo', 'The Weeknd', 'Metallica', 'Daft Punk',
-            'Red Hot Chili Peppers', 'Kendrick Lamar', 'Linkin Park', 'The Cure']
+               'Red Hot Chili Peppers', 'Kendrick Lamar', 'Linkin Park',
+               'The Cure']
     main(artists)
