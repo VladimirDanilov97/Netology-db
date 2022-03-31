@@ -145,12 +145,13 @@ def select_query():
     where track_name ~ '\sMy\s' or track_name ~ '\sМой\s';'''))
 
 
-def main():
-    artists = ['Placebo', 'The Weeknd', 'Metallica', 'Daft Punk',
-               'Red Hot Chili Peppers', 'Kendrick Lamar', 'Linkin Park',
-               'The Cure']
+def main(artists):
+    
     insert_top_10_tracks(artists)
     select_query()
 
 if __name__== '__main__':
+    artists = ['Placebo', 'The Weeknd', 'Metallica', 'Daft Punk',
+               'Red Hot Chili Peppers', 'Kendrick Lamar', 'Linkin Park',
+               'The Cure']
     main()
