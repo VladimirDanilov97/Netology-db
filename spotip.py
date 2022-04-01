@@ -146,7 +146,6 @@ def select_query():
 
 
 def main(artists):
-    
     insert_top_10_tracks(artists)
     select_query()
 
