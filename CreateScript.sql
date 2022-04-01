@@ -7,10 +7,9 @@ drop table if exists album;
 drop table if exists artist;
 drop table if exists category;
 
-
 CREATE TABLE IF NOT EXISTS category(
 id            serial PRIMARY KEY,
-category_name varchar(40) UNIQUE NOT NULL
+category_name varchar(80) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS artist(
@@ -25,7 +24,8 @@ CONSTRAINT  artist_category_pk primary key (artist_id, category_id));
 
 CREATE TABLE IF NOT EXISTS collection(
 id            serial PRIMARY KEY,
-category_name varchar(40) UNIQUE NOT NULL
+collection_name varchar(40) UNIQUE NOT null,
+release_date integer NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS album(
@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS collection_track(
 collection_id integer   REFERENCES collection (id),
 track_id      integer REFERENCES track(id),
 CONSTRAINT    collection_track_pk PRIMARY KEY (collection_id, track_id));
-
 
 
 

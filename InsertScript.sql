@@ -55,6 +55,11 @@ values (
 );
 insert into artist_category(artist_id, category_id)
 values (
+(select id from artist where artist_name='Daft Punk'),
+(select id from category where category_name='electronic')
+);
+insert into artist_category(artist_id, category_id)
+values (
 (select id from artist where artist_name='Metallica'),
 (select id from category where category_name='metall')
 );
@@ -313,5 +318,4 @@ values (
 (select id from collection where collection_name='Standing On Beach'),
 (select id from track where track_name='A Forest')
 );
-
 
