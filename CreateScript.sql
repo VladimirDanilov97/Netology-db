@@ -6,11 +6,6 @@ drop table if exists collection;
 drop table if exists album;
 drop table if exists artist;
 drop table if exists category;
-ALTER SEQUENCE artist_id_seq RESTART WITH 1;
-ALTER SEQUENCE album_id_seq RESTART WITH 1;
-ALTER SEQUENCE track_id_seq RESTART WITH 1;
-ALTER SEQUENCE collection_id_seq RESTART WITH 1;
-ALTER SEQUENCE category_id_seq RESTART WITH 1;
 
 
 CREATE TABLE IF NOT EXISTS category(
