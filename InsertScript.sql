@@ -42,6 +42,8 @@ INSERT into category(category_name)
 values('rock');
 INSERT into category(category_name) 
 values('hip-hop');
+INSERT into category(category_name) 
+values('britpop');
 
 insert into artist_category(artist_id, category_id)
 values (
@@ -82,6 +84,11 @@ insert into artist_category(artist_id, category_id)
 values (
 (select id from artist where artist_name='The Cure'),
 (select id from category where category_name='rock')
+);
+insert into artist_category(artist_id, category_id)
+values (
+(select id from artist where artist_name='The Cure'),
+(select id from category where category_name='britpop')
 );
 
 INSERT into album(album_name, release_date) 
